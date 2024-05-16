@@ -18,7 +18,10 @@ public class Main {
             System.out.println("5. Afiseaza membrii");
             System.out.println("6. Afiseaza antrenamente");
             System.out.println("7. Afiseaza competitiile unui membru");
-            System.out.println("8. Iesire");
+            System.out.println("8. Anulare/reprogramare antrenament");
+            System.out.println("9.Adaugare/Afisare echipamente");
+            System.out.println("10. Afisare Progres");
+            System.out.println("11. Iesire");
 
             System.out.print("Introduceti optiunea: ");
             int optiune = scanner.nextInt();
@@ -184,6 +187,51 @@ public class Main {
                     }
                     break;
                 case 8:
+                    System.out.println("Alegeți acțiunea: 1. Anulare antrenament, 2. Reprogramare antrenament");
+                    int alegereAntrenament = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Introduceți identificatorul antrenamentului:");
+                    int idAntrenament = scanner.nextInt();
+                    scanner.nextLine();
+                    if (alegereAntrenament == 1) {
+                        management.anuleazaAntrenament(idAntrenament);
+                        System.out.println("Antrenament anulat.");
+                    } else if (alegereAntrenament == 2) {
+                        System.out.println("Introduceți noua dată și oră (format YYYY-MM-DDTHH:MM):");
+                        String nouaDataOra = scanner.nextLine();
+                        management.reprogrameazaAntrenament(idAntrenament, LocalDateTime.parse(nouaDataOra));
+                        System.out.println("Antrenament reprogramat.");
+                    }
+                    break;
+                case 9:
+                    System.out.println("1. Adaugare echipament");
+                    System.out.println("2. Afișare echipament");
+                    int subOptiune = scanner.nextInt();
+                    scanner.nextLine();
+                    if (subOptiune == 1) {
+                        System.out.println("Introduceti numele echipamentului:");
+                        String numeEchipament = scanner.nextLine();
+                        System.out.println("Introduceti cantitatea:");
+                        int cantitate = scanner.nextInt();
+                        scanner.nextLine();
+                        management.adaugaEchipament(numeEchipament, cantitate);
+                        System.out.println("Echipament adăugat cu succes!");
+                    } else if (subOptiune == 2) {
+                        management.afiseazaEchipamente();
+                    }
+                    break;
+                case 10:
+                    System.out.println("Introduceți numele complet al membrului pentru vizualizarea progresului:");
+                    String numePrenume = scanner.nextLine();
+                    Membru membruPentruProgres = management.cautaMembru(numePrenume);
+                    if (membruPentruProgres != null) {
+                        System.out.println(membruPentruProgres.afiseazaProgres());
+                    } else {
+                        System.out.println("Membru nu a fost găsit.");
+                    }
+                    break;
+
+                case 11:
                     // Iesire din program
                     System.out.println("Iesire din program...");
                     scanner.close();

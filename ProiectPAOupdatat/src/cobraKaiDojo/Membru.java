@@ -124,4 +124,12 @@ import java.util.*;
         public void adaugaAntrenament(Antrenament antrenament) {
             this.antrenamente.add(antrenament);
         }
+        public String afiseazaProgres() {
+            // Exemplu simplificat; adaptează în funcție de atributele și logica specifică
+            StringBuilder sb = new StringBuilder();
+            sb.append("Progresul lui ").append(nume).append(" ").append(prenume).append(":\n");
+            sb.append("Nivelul actual: ").append(grad).append("\n");
+            sb.append("Număr antrenamente participat: ").append(antrenamente.size()).append("\n");
+            return sb.toString();
+        }
     }
